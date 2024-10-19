@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add/Edit Employee</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            margin: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 th:text="${employee.id == null ? 'Add Employee' : 'Edit Employee'}"></h1>
+        <form th:action="@{/employees}" th:object="${employee}" method="post" class="form">
+            <input type="hidden" th:field="*{id}"/>
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" th:field="*{title}" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="department">Department:</label>
+                <select id="department" th:field="*{department}" class="form-control" required>
+                    <option value="" disabled selected>Select Department</option>
+                    <option value="IT">IT</option>
+                    <option value="Accounting">Accounting</option>
+                    <option value="Human Resources">Human Resources</option>
+                    <option value="Technical">Technical</option>
+                    <option value="Management">Management</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" th:field="*{startDate}" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" th:field="*{endDate}" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" th:field="*{age}" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+        <a href="/employees" class="btn btn-secondary" style="margin-top: 15px;">Back to List</a>
+    </div>
+</body>
+</html>
